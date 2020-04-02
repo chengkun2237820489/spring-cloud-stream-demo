@@ -18,6 +18,9 @@
         <module>spring-cloud-stream-kafka-producer</module>
         <module>spring-cloud-stream-kafka-consumer1</module>
         <module>spring-cloud-stream-kafka-consumer2</module>
+        <module>spring-cloud-stream-rabbit-producer</module>
+        <module>spring-cloud-stream-rabbit-consumer1</module>
+        <module>spring-cloud-stream-rabbit-consumer2</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

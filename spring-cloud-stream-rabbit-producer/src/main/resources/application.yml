@@ -1,0 +1,43 @@
+server:
+  port: 7891
+spring:
+  application:
+    name: rabbit-producer
+  cloud:
+    stream:
+        rabbit:  # \u8FDB\u884Crabbit\u7684\u76F8\u5173\u7ED1\u5B9A\u914D\u7F6E
+          bindings:
+            output_1:
+              producer: # \u8FDB\u884C\u751F\u4EA7\u7AEF\u914D\u7F6E
+                routing-key-expression:  headers['routingKey'] #\u5B9A\u4E49 RoutingKey \u7684\u8868\u8FBE\u5F0F\u914D\u7F6E
+            output_2:
+              producer: # \u8FDB\u884C\u751F\u4EA7\u7AEF\u914D\u7F6E
+                routing-key-expression:  headers['routingKey'] #\u5B9A\u4E49 RoutingKey \u7684\u8868\u8FBE\u5F0F\u914D\u7F6E
+        binders: # \u5728\u6B64\u5904\u914D\u7F6E\u8981\u7ED1\u5B9A\u7684rabbitmq\u7684\u670D\u52A1\u4FE1\u606F\uFF1B
+          defaultRabbit: # \u8868\u793A\u5B9A\u4E49\u7684\u540D\u79F0\uFF0C\u7528\u4E8E\u4E8Ebinding\u6574\u5408
+            type: rabbit # \u6D88\u606F\u7EC4\u4EF6\u7C7B\u578B
+            environment: # \u8BBE\u7F6Erabbitmq\u7684\u76F8\u5173\u7684\u73AF\u5883\u914D\u7F6E
+              spring:
+                rabbitmq:
+                  host: localhost
+                  port: 5672
+                  username: guest
+                  password: guest
+                  virtual-host: /
+        bindings: # \u670D\u52A1\u7684\u6574\u5408\u5904\u7406
+          output: # \u9ED8\u8BA4\u8F93\u51FA\u901A\u9053
+            destination: studyExchange # \u8868\u793A\u8981\u4F7F\u7528\u7684Exchange\u540D\u79F0\u5B9A\u4E49
+            content-type: application/json # \u8BBE\u7F6E\u6D88\u606F\u7C7B\u578B\uFF0C\u672C\u6B21\u4E3A\u5BF9\u8C61json\uFF0C\u5982\u679C\u662F\u6587\u672C\u5219\u8BBE\u7F6E\u201Ctext/plain\u201D
+            binder: defaultRabbit # \u8BBE\u7F6E\u8981\u7ED1\u5B9A\u7684\u6D88\u606F\u670D\u52A1\u7684\u5177\u4F53\u8BBE\u7F6E
+          myOutput: # \u9ED8\u8BA4\u8F93\u51FA\u901A\u9053
+            destination: MyStudyExchange # \u8868\u793A\u8981\u4F7F\u7528\u7684Exchange\u540D\u79F0\u5B9A\u4E49
+            content-type: application/json # \u8BBE\u7F6E\u6D88\u606F\u7C7B\u578B\uFF0C\u672C\u6B21\u4E3A\u5BF9\u8C61json\uFF0C\u5982\u679C\u662F\u6587\u672C\u5219\u8BBE\u7F6E\u201Ctext/plain\u201D
+            binder: defaultRabbit # \u8BBE\u7F6E\u8981\u7ED1\u5B9A\u7684\u6D88\u606F\u670D\u52A1\u7684\u5177\u4F53\u8BBE\u7F6E
+          output_1: # \u9ED8\u8BA4\u8F93\u51FA\u901A\u9053
+            destination: MyStudyExchange1 # \u8868\u793A\u8981\u4F7F\u7528\u7684Exchange\u540D\u79F0\u5B9A\u4E49
+            content-type: application/json # \u8BBE\u7F6E\u6D88\u606F\u7C7B\u578B\uFF0C\u672C\u6B21\u4E3A\u5BF9\u8C61json\uFF0C\u5982\u679C\u662F\u6587\u672C\u5219\u8BBE\u7F6E\u201Ctext/plain\u201D
+            binder: defaultRabbit # \u8BBE\u7F6E\u8981\u7ED1\u5B9A\u7684\u6D88\u606F\u670D\u52A1\u7684\u5177\u4F53\u8BBE\u7F6E
+          output_2: # \u9ED8\u8BA4\u8F93\u51FA\u901A\u9053
+            destination: MyStudyExchange2 # \u8868\u793A\u8981\u4F7F\u7528\u7684Exchange\u540D\u79F0\u5B9A\u4E49
+            content-type: application/json # \u8BBE\u7F6E\u6D88\u606F\u7C7B\u578B\uFF0C\u672C\u6B21\u4E3A\u5BF9\u8C61json\uFF0C\u5982\u679C\u662F\u6587\u672C\u5219\u8BBE\u7F6E\u201Ctext/plain\u201D
+            binder: defaultRabbit # \u8BBE\u7F6E\u8981\u7ED1\u5B9A\u7684\u6D88\u606F\u670D\u52A1\u7684\u5177\u4F53\u8BBE\u7F6E
